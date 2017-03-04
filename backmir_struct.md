@@ -209,7 +209,7 @@
 ## PlayerEquipAttrib
 - PlayerEquipAttrib struc ; (sizeof=0x34, align=0x4, copyof_1984)
 | offset | member | size/type |
-|--------|--|------|----------|
+|--------|------|----------|
 | 00000000 | nWeapon | dd |
 | 00000004 | nCloth | dd |
 | 00000008 | nNeck  | dd |
@@ -227,7 +227,7 @@
 - MagicDetail     struc ; (sizeof=0x10, align=0x4, copyof_1992)
 
 | offset | member | size/type |
-|--------|--|------|----------|
+|--------|------|----------|
 | 00000000 | cKey | db |
 | 00000001 | cAccKey | db |
 | 00000002 | db | undefined |
