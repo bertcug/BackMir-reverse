@@ -1,5 +1,6 @@
 ## GamePlayer
 - GamePlayer struc ; (sizeof=0xABC, align=0x4, copyof_2029)
+
 | offset | member | size/type |
 |--------|--------|-----------|
 | 00000000 | baseclass_0 | GameOtherPlayer |
@@ -63,6 +64,7 @@
 
 ## GameOtherPlayer
 - GameOtherPlayer struc (sizeof=0x794, align=0x4, copyof_1983)
+
 | offset | member | size/type |
 |--------|--------|-----------|
 | 00000000 | baseclass_0 | GameObject |
@@ -99,6 +101,7 @@
 
 ## GameObject
 - GameObject struc (sizeof=0x1E8, align=0x4, copyof_1936)
+
 | offset | member | size/type |
 |--------|--------|-----------|
 | 00000000 | baseclass_0 |     RenderObject |
@@ -140,6 +143,7 @@
 
 ## ItemAttrib
 - ItemAttrib      struc ; (sizeof=0x60, align=0x4, mappedto_958)
+
 | member | offset | size|
 |--------|--------|-----|
 | 00000000 | id |  dd |
@@ -185,6 +189,7 @@
 
 ## UserData
 - UserData struc ; (sizeof=0x78, align=0x4, copyof_1460)
+
 | offset | member | size/type |
 |--------|--|------|----------|
 | 00000000 | stAttrib | ItemAttrib  |
@@ -220,6 +225,7 @@
 
 ## MagicDetail
 - MagicDetail     struc ; (sizeof=0x10, align=0x4, copyof_1992)
+
 | offset | member | size/type |
 |--------|--|------|----------|
 | 00000000 | cKey | db |
