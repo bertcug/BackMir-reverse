@@ -191,7 +191,7 @@
 - UserData struc ; (sizeof=0x78, align=0x4, copyof_1460)
 
 | offset | member | size/type |
-|--------|--|------|----------|
+|--------|------|----------|
 | 00000000 | stAttrib | ItemAttrib  |
 | 00000060 | wCoordX |  dw  |
 | 00000062 | wCoordY |  dw  |
@@ -208,6 +208,7 @@
 
 ## PlayerEquipAttrib
 - PlayerEquipAttrib struc ; (sizeof=0x34, align=0x4, copyof_1984)
+
 | offset | member | size/type |
 |--------|------|----------|
 | 00000000 | nWeapon | dd |
