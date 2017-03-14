@@ -204,25 +204,6 @@
 | 00000030 |       nHairStyle       |    dd     |
 | 00000034 | PlayerEquipAttrib ends |           |
 
-## PlayerEquipAttrib
-- PlayerEquipAttrib struc ; (sizeof=0x34, align=0x4, copyof_1984)
-
-| offset   | member                 | size/type |
-| -------- | ---------------------- | --------- |
-| 00000000 | nWeapon                | dd        |
-| 00000004 | nCloth                 | dd        |
-| 00000008 | nNeck                  | dd        |
-| 0000000C | nBrac                  | dd[2]     |
-| 00000014 | nRing                  | dd[2]     |
-| 0000001C | nHelm                  | dd        |
-| 00000020 | nMedal                 | dd        |
-| 00000024 | nGem                   | dd        |
-| 00000028 | nShoe                  | dd        |
-| 0000002C | nBelt                  | dd        |
-| 00000030 | nHairStyle             | dd        |
-| 00000034 | PlayerEquipAttrib ends |           |
->>>>>>> c01b0732aeeb3a36c2852b79bf1cd0b485c910c1
-
 ## MagicDetail
 - MagicDetail     struc ; (sizeof=0x10, align=0x4, copyof_1992)
 
@@ -313,6 +294,7 @@ PS：有几次开着这辅助玩LOL，被封了两次三天的号        拳头�
 ##  服务端GameObject
 
 - GameObject      struc ; (sizeof=0x1D8, align=0x4, copyof_753)
+
 |  offset  |          member          |                size/type                 |
 | :------: | :----------------------: | :--------------------------------------: |
 | 00000000 |       baseclass_0        |                LockObject                |
@@ -371,6 +353,7 @@ PS：有几次开着这辅助玩LOL，被封了两次三天的号        拳头�
 | 000001D8 |   GameObject      ends   |                                          |
 ## UserData
 - UserData struc ; (sizeof=0x78, align=0x4, copyof_1460)
+
 |  offset  |    member    |     size/type     |
 | :------: | :----------: | :---------------: |
 | 00000000 |   stAttrib   | ItemAttrib   同客户端 |
