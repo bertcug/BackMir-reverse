@@ -189,6 +189,7 @@
 
 ## PlayerEquipAttrib
 - PlayerEquipAttrib struc ; (sizeof=0x34, align=0x4, copyof_1984)
+
 |  offset  |         member         | size/type |
 | :------: | :--------------------: | :-------: |
 | 00000000 |        nWeapon         |    dd     |
