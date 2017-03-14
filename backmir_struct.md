@@ -1,5 +1,5 @@
 ## GamePlayer
-- GamePlayer struc ; (sizeof=0xABC, align=0x4, copyof_2029)
+- GamePlayer struc ; (sizeof=0xABC, align=0x4)
 
 |  offset  |             member             |                size/type                 |
 | :------: | :----------------------------: | :--------------------------------------: |
@@ -63,7 +63,7 @@
 | 00000ABB |                                |                    db                    |
 
 ## GameOtherPlayer
-- GameOtherPlayer struc (sizeof=0x794, align=0x4, copyof_1983)
+- GameOtherPlayer struc (sizeof=0x794, align=0x4)
 
 |  offset  |           member            |                size/type                 |
 | :------: | :-------------------------: | :--------------------------------------: |
@@ -100,7 +100,7 @@
 | 00000794 |    GameOtherPlayer ends     |                                          |
 
 ## GameObject
-- GameObject struc (sizeof=0x1E8, align=0x4, copyof_1936)
+- GameObject struc (sizeof=0x1E8, align=0x4)
 
 |  offset  |         member         |                size/type                 |
 | :------: | :--------------------: | :--------------------------------------: |
@@ -142,7 +142,7 @@
 | 000001E8 |       GameObject       |                   ends                   |
 
 ## ItemAttrib
-- ItemAttrib      struc ; (sizeof=0x60, align=0x4, mappedto_958)
+- ItemAttrib      struc ; (sizeof=0x60, align=0x4)
 
 |  member  |      offset      |   size   |
 | :------: | :--------------: | :------: |
@@ -188,7 +188,7 @@
 | 00000060 | ItemAttrib  ends |          |
 
 ## PlayerEquipAttrib
-- PlayerEquipAttrib struc ; (sizeof=0x34, align=0x4, copyof_1984)
+- PlayerEquipAttrib (sizeof=0x34, align=0x4)
 
 |  offset  |         member         | size/type |
 | :------: | :--------------------: | :-------: |
@@ -206,7 +206,7 @@
 | 00000034 | PlayerEquipAttrib ends |           |
 
 ## MagicDetail
-- MagicDetail     struc ; (sizeof=0x10, align=0x4, copyof_1992)
+- MagicDetail  (sizeof=0x10, align=0x4)
 
 |  offset  |      member      | size/type |
 | :------: | :--------------: | :-------: |
@@ -223,7 +223,7 @@
 
 
 ## ExtendHeroAttrib
-- ExtendHeroAttrib struc ; (sizeof=0x2C, align=0x4, copyof_5615)
+- ExtendHeroAttrib (sizeof=0x2C, align=0x4)
 
 |  offset  |        member         | size/type |
 | :------: | :-------------------: | :-------: |
@@ -246,7 +246,7 @@
 | 00000014 |     uMakeEquipExp     |    dw     |
 | 00000016 |                       |    db     |
 | 00000017 |                       |    db     |
-| 00000018 |      uChatColor       |   dd ?    |
+| 00000018 |      uChatColor       |    dd     |
 | 0000001C |      uClothLook       |    dd     |
 | 00000020 |      uWeaponLook      |    dd     |
 | 00000024 |      uNameFrame       |    dd     |
@@ -277,7 +277,7 @@ PS：有几次开着这辅助玩LOL，被封了两次三天的号        拳头�
   > - EXPRTable 2CA570 (2.10.18)  
   >
   > - 加密算法是异或
-  >   直接IDA修改数据是不行的，可能有一些检查和验证机制，但是cheatengine该加密后的数据是可行的。
+  >   直接IDA修改数据是不行的，可能有一些检查和验证机制，但是cheatengine改加密后的数据是可行的。
 
 - 很遗憾，后来经过查验，上面的地址是会变的，原因应该是基址发生变化，好在cheatengine支持符号作为地址，可以很容易找到所有的地址。
 
@@ -288,13 +288,13 @@ PS：有几次开着这辅助玩LOL，被封了两次三天的号        拳头�
   - `gamesvr.g_nHPTable`               每级HP表
   - `gamesvr.g_nMPTable`               每级MP表
   - `gamesvr.g_nWanLiTable`           每级腕力表
-  - `gamesvr.g_pxHeros`                 当前在线用户列表  指针类型
+  - `gamesvr.g_pxHeros`:当前在线用户列表（指针类型），定义的是GameObject类型，可强制转换，看到了强制转换代码
   - `gamesvr.g_xMagicInfoTable`     角色技能表
   - `gamesvr.g_xUserInfoList`         暂时没研究
 
 ##  服务端GameObject
 
-- GameObject      struc ; (sizeof=0x1D8, align=0x4, copyof_753)
+- GameObject  (sizeof=0x1D8, align=0x4)
 
 |  offset  |          member          |                size/type                 |
 | :------: | :----------------------: | :--------------------------------------: |
@@ -352,8 +352,103 @@ PS：有几次开着这辅助玩LOL，被封了两次三天的号        拳头�
 | 000001B8 |  m_dwHPRecoverInterval   |                    dd                    |
 | 000001BC |     m_xDelayActions      | `std::list<DelayActionBase *,std::allocator<DelayActionBase *>` |
 | 000001D8 |   GameObject      ends   |                                          |
+## HeroOBject
+
+- HeroObject  (sizeof=0x33A4, align=0x4)
+
+
+|  offset  |           member            |                size/type                 |
+| :------: | :-------------------------: | :--------------------------------------: |
+| 00000000 |         baseclass_0         |                GameObject                |
+| 000001D8 |           m_xBag            | `std::vector<ItemAttrib,std::allocator<ItemAttrib>>` |
+| 000001F0 |          m_nMoney           |                    dd                    |
+| 000001F4 |          m_stEquip          |           ItemAttrib 13 dup(?)           |
+| 000006D4 |          m_stStore          |           ItemAttrib 36 dup(?)           |
+| 00001454 |        m_stBigStore         |           ItemAttrib 80 dup(?)           |
+| 00003254 |     m_bBigStoreReceived     |                    db                    |
+| 00003255 |       m_bClientLoaded       |                    db                    |
+| 00003256 |                             |                    db                    |
+| 00003257 |                             |                    db                    |
+| 00003258 |          m_xQuest           |               QuestContext               |
+| 0000326C |      m_nAssistItemSum       |                    dd                    |
+| 00003270 |          m_dwIndex          |                    dd                    |
+| 00003274 |         m_dwDefence         |                    dd                    |
+| 00003278 |          m_xMagics          | `std::vector<UserMagic,std::allocator<UserMagic> >` |
+| 00003290 |       m_dwLastCityMap       |                    dw                    |
+| 00003292 |                             |                    db                    |
+| 00003293 |                             |                    db                    |
+| 00003294 |          m_pSlaves          |               dd 3 dup(?)                |
+| 000032A0 |      m_dwLastSpellTime      |                    dd                    |
+| 000032A4 |         m_dwTimeOut         |                    dd                    |
+| 000032A8 |        m_bIsNewHero         |                    db                    |
+| 000032A9 |                             |                    db                    |
+| 000032AA |                             |                    db                    |
+| 000032AB |                             |                    db                    |
+| 000032AC |     m_dwLastReviveTime      |                    dd                    |
+| 000032B0 |         m_uVersion          |                    dw                    |
+| 000032B2 |                             |                    db                    |
+| 000032B3 |                             |                    db                    |
+| 000032B4 |      m_dwLastCheckTime      |                    dd                    |
+| 000032B8 |        m_nGainedExp         |                    dd                    |
+| 000032BC |   m_dwLastUseMoveRingTime   |                    dd                    |
+| 000032C0 |          m_nTeamID          |                    dd                    |
+| 000032C4 |    m_dwLastRecvDataTime     |                    dd                    |
+| 000032C8 |    m_dwLastLoginMinutes     |                    dd                    |
+| 000032CC |  m_dwKilledMonsterCounter   |                    dd                    |
+| 000032D0 |  m_dwDoubleDropExpireTime   |                    dd                    |
+| 000032D4 |    m_dwReviveRingUseTime    |                    dd                    |
+| 000032D8 |         m_dwLSIndex         |                    dd                    |
+| 000032DC |           m_dwUID           |                    dd                    |
+| 000032E0 |          m_bGmHide          |                    db                    |
+| 000032E1 |                             |                    db                    |
+| 000032E2 |                             |                    db                    |
+| 000032E3 |                             |                    db                    |
+| 000032E4 |   m_dwLastPrivateChatTime   |                    dd                    |
+| 000032E8 |    m_dwLastTeamChatTime     |                    dd                    |
+| 000032EC |   m_dwLastReqOffSellItems   |                    dd                    |
+| 000032F0 |   m_dwLastReqOffTakeBack    |                    dd                    |
+| 000032F4 |    m_dwJinGangExpireTime    |                    dd                    |
+| 000032F8 |          m_bUnUse           |                    db                    |
+| 000032F9 |                             |                    db                    |
+| 000032FA |                             |                    db                    |
+| 000032FB |                             |                    db                    |
+| 000032FC |    m_nAbnormalSpeedTimes    |                    dd                    |
+| 00003300 |      m_dwLoginTimeTick      |                    dd                    |
+| 00003304 |      m_bCheckSoldItems      |                    db                    |
+| 00003305 |     m_cAutoSaveCounter      |                    db                    |
+| 00003306 |                             |                    db                    |
+| 00003307 |                             |                    db                    |
+| 00003308 |       m_nDonateMoney        |                    dd                    |
+| 0000330C |        m_nDonateLeft        |                    dd                    |
+| 00003310 |       m_xGiftItemIDs        | `std::vector<int,std::allocator<int> >`  |
+| 00003328 |       m_xDrugUseTime        | `std::map<int,unsigned long,std::less<int>,std::allocator<std::pair<int const ,unsigned long> > >` |
+| 00003348 |    m_dwServerNetDelaySec    |                    dd                    |
+| 0000334C | m_dwLastCheckServerNetDelay |                    dd                    |
+| 00003350 |    m_nServerNetDelaySeq     |                    dd                    |
+| 00003354 |     m_xNormalAttackRand     |              RandGenerator               |
+| 00003358 |        m_stExtAttrib        |             ExtendHeroAttrib             |
+| 00003384 |    m_bLastAttackCritical    |                    db                    |
+| 00003385 |                             |                    db                    |
+| 00003386 |                             |                    db                    |
+| 00003387 |                             |                    db                    |
+| 00003388 |  m_nEnterTimeLimitMapTime   |                    dd                    |
+| 0000338C |       m_nTimeLimitID        |                    dd                    |
+| 00003390 |      m_nLastUseMagicID      |                    dd                    |
+| 00003394 |       m_bNeedTransAni       |                    db                    |
+| 00003395 |    m_byteDifficultyLevel    |                    db                    |
+| 00003396 |                             |                    db                    |
+| 00003397 |                             |                    db                    |
+| 00003398 |          m_ePkType          |           dd  enum HeroPkType            |
+| 0000339C |        m_bSmallQuit         |                    db                    |
+| 0000339D |                             |                    db                    |
+| 0000339E |                             |                    db                    |
+| 0000339F |                             |                    db                    |
+| 000033A0 |      m_nExtraSuitType       |                    dd                    |
+| 000033A4 |    HeroObject      ends     |                                          |
+
 ## UserData
-- UserData struc ; (sizeof=0x78, align=0x4, copyof_1460)
+
+- UserData (sizeof=0x78, align=0x4)
 
 |  offset  |    member    |     size/type     |
 | :------: | :----------: | :---------------: |
@@ -470,4 +565,10 @@ unsigned int __cdecl DecryptValue(unsigned int _mask, unsigned int _value)
 找到经验表，找到经验Mask，把所有升级经验都置为1，不到5分钟，一个80级新手村号诞生了！
 
 ![](zs80.png)
+
+晚上使用Cheatengine写了个刷金币服务端挂：
+
+![](wg.png)
+
+游戏最多携带1亿金币，点了按钮，然后卖点东西或者买点东西就可以刷出金币。
 
